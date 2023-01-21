@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       time: {
-        type: Sequelize.NOW
+        type: Sequelize.DATE
       },
       choice: {
         type: Sequelize.STRING
