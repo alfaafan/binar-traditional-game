@@ -51,7 +51,7 @@ html .navigation a {
 /* left side */
 
 .login-left {
-  padding-top: 35vh;
+  padding-top: 20vh;
   padding-left: 10vw !important;
 }
 
@@ -68,14 +68,15 @@ html .navigation a {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
   color: var(--primary) !important;
 }
 
 /* right side */
 
 .login-right {
-  padding-top: 45vh;
+  padding-top: 35vh;
 }
 
 .greetings {
@@ -84,4 +85,10 @@ input[type="password"] {
 
 p {
   font-size: 24px;
+}
+
+@media only screen and (max-width: 576px) {
+  .login {
+    flex-direction: column-reverse !important;
+  }
 }

@@ -20,6 +20,9 @@ app.get("/game", (req, res) => {
 const authRouter = require("./routes/auth");
 app.use("/auth", authRouter);
 
+const dashboardRouter = require("./routes/dashboard");
+app.use("/dashboard", dashboardRouter);
+
 // internal server handler
 app.use((err, req, res, next) => {
   res.status(500).json({

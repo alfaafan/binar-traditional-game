@@ -1,0 +1,54 @@
+/* general */
+:root {
+  --primary: #fbb341;
+}
+
+* {
+  font-family: "Open Sans", sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* navbar */
+nav {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+nav .nav-icon {
+  margin-top: 10px;
+}
+
+.nav-link:hover {
+  color: #fbb341 !important;
+}
+
+html .navigation a {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+}
+
+body {
+  background-image: radial-gradient(189.96% 61.18% at 50% 38.82%, rgba(255, 181, 72, 0) 0%, rgba(52, 44, 29, 0.80319) 73.22%, #08090a 99.74%), url(/home/img/bg/main-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+h1 {
+  font-family: "Bebas Neue", cursive;
+  color: var(--primary) !important;
+  font-size: 5em !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  padding-top: 20vh;
+}
+
+p {
+  font-size: 1.5em;
+}
+
+.link {
+  padding-top: 1em;
+}

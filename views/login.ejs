@@ -12,22 +12,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <%- include("partials/nav") %> 
+    <%- include("partials/nav") %>
     <!-- main -->
     <div class="container-fluid justify-content-center" id="main">
-      <div class="row"></div>
       <div class="row login">
         <div class="col login-left">
           <h1 class="mb-3">Log in to your account</h1>
-          <form>
+          <form method="post">
             <div class="mb-3">
-              <label for="email" class="form-label text-white-50">Email address</label>
-              <input type="email" placeholder="Email" class="form-control bg-dark" id="email" aria-describedby="emailHelp" />
+              <label for="username" class="form-label text-white-50">Email address</label>
+              <input type="email" placeholder="Email" class="form-control bg-dark" name="username" id="username" aria-describedby="emailHelp" />
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label text-white-50">Password</label>
-              <input type="password" placeholder="Password" class="form-control bg-dark" id="password" />
+              <input type="password" placeholder="Password" class="form-control bg-dark" name="password" id="password" />
             </div>
             <div class="mb-3">
               <a class="redirector text-white-50" href="/auth/register">Don't have an account? Sign up now!</a>
