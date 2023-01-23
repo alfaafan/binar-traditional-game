@@ -9,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasOne(models.User_biodata, {
-        foreignKey: "user_id",
-        as: "user_biodata",
-      });
+      // User.hasOne(models.User_biodata, {
+      //   foreignKey: "user_id",
+      //   as: "user_biodata",
+      // });
 
-      User.hasMany(models.User_history, {
-        foreignKey: "user_id",
-        as: "user_history",
-      });
+      // User.hasMany(models.User_history, {
+      //   foreignKey: "user_id",
+      //   as: "user_history",
+      // });
     }
   }
   User.init(
