@@ -1,15 +1,15 @@
-const { User, User_biodata } = require("../models");
+const { Users, Profiles } = require("../models");
 
 // get dashboard
 const getDashboard = (req, res) => {
-  res.render("dashboard");
+  res.render("dashboard", { title: "Dashboard" });
 };
 
 // get all users
 const getUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.render("users", { users });
+    const users = await Users.findAll();
+    res.render("users", { users, title: "Users" });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -18,12 +18,12 @@ const getUsers = async (req, res) => {
 // get user
 const getUser = async (req, res) => {
   try {
-    const user = await User.findOne({
+    const user = await Users.findOne({
       where: {
         id: req.params.id,
       },
     });
-    res.render("user", { user });
+    res.render("user", { user, title: "User" });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -33,7 +33,7 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
   let { username, password } = req.body;
   try {
-    const user = await User.create({
+    const user = await Users.create({
       username: username,
       password: password,
     });
@@ -47,7 +47,7 @@ const createUser = async (req, res) => {
 const updateData = async (req, res) => {
   const { username } = req.body;
   try {
-    const user = await User.update(
+    const user = await Users.update(
       {
         username: username,
       },
@@ -67,7 +67,7 @@ const updateData = async (req, res) => {
 const deleteData = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await User.destroy({
+    const result = await Users.destroy({
       where: {
         id: id,
       },
@@ -81,7 +81,7 @@ const deleteData = async (req, res) => {
 // create biodata
 const postBiodata = async (req, res) => {
   try {
-    const biodata = await User_biodata.create({
+    const biodata = await Profiles.create({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
     });

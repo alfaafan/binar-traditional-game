@@ -3,27 +3,21 @@ const app = express();
 const port = 3000;
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// app.use(express.json());
 
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
+const pageRouter = require("./routes/pageRouter");
+app.use(pageRouter);
 
-app.get("/game", (req, res) => {
-  res.render("game");
-});
-
-const authRouter = require("./routes/auth");
+const authRouter = require("./routes/authRouter");
 app.use("/auth", authRouter);
 
-const dashboardRouter = require("./routes/dashboard");
+const dashboardRouter = require("./routes/dashboardRouter");
 app.use("/dashboard", dashboardRouter);
 
-// internal server handler
 app.use((err, req, res, next) => {
   res.status(500).json({
     status: "fail",
@@ -31,11 +25,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
 app.use((req, res, next) => {
-  res.status(404).render("404");
+  res.status(404).render("404", { title: "404 Not Found" });
 });
 
 app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+  console.log(`Server listening on port ${port}`);
 });

@@ -1,13 +1,13 @@
-const { User } = require("../models");
+const { Users } = require("../models");
 
 // login
 const getLogin = (req, res) => {
-  res.render("login");
+  res.render("login", { title: "Login Page" });
 };
 
 const postLogin = (req, res) => {
   const { username, password } = req.body;
-  User.findOne({
+  Users.findOne({
     where: {
       username: username,
       password: password,
@@ -25,13 +25,13 @@ const postLogin = (req, res) => {
 
 // register
 const getRegister = (req, res) => {
-  res.render("register");
+  res.render("register", { title: "Register Page" });
 };
 
 const postRegister = async (req, res) => {
   let { username, password } = req.body;
   try {
-    const user = await User.create({
+    const user = await Users.create({
       username: username,
       password: password,
     });
