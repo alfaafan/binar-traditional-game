@@ -11,11 +11,15 @@
       <div class="row">
         <div class="col-4">
           <p><%= user.username %></p>
+          <p><%= profiles.first_name %> <%= profiles.last_name %></p>
         </div>
         <div class="col-2">
           <form method="delete">
             <button class="btn btn-outline-warning">Delete Account</button>
           </form>
+          <% user.forEach(user => { %>
+          <a href="/users/edit/<%= user.id %>"></a>
+          <% }); %>
         </div>
       </div>
       <div class="row">

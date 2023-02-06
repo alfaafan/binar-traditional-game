@@ -23,7 +23,12 @@ const getUser = async (req, res) => {
         id: req.params.id,
       },
     });
-    res.render("user", { user, title: "User" });
+    const profiles = await Profiles.findOne({
+      where: {
+        user_id: req.params.id,
+      },
+    });
+    res.render("user", { user, profiles, title: "User" });
   } catch (error) {
     res.status(500).send(error);
   }
@@ -81,9 +86,11 @@ const deleteData = async (req, res) => {
 // create biodata
 const postBiodata = async (req, res) => {
   try {
+    const { firstname, lastname } = req.body;
     const biodata = await Profiles.create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
+      first_name: firstname,
+      last_name: lastname,
+      user_id: req.params.id,
     });
     res.send(biodata);
   } catch (error) {

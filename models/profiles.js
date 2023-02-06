@@ -10,20 +10,20 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.Users, {
-        foreignKey: "userId",
+        foreignKey: "user_id",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
     }
     getFullname() {
-      return [this.firstName, this.lastName].join(" ");
+      return [this.first_name, this.last_name].join(" ");
     }
   }
   Profiles.init(
     {
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
-      userId: DataTypes.INTEGER,
+      first_name: DataTypes.STRING,
+      last_name: DataTypes.STRING,
+      user_id: DataTypes.INTEGER,
     },
     {
       sequelize,

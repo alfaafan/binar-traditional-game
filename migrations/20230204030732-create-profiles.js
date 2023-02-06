@@ -9,13 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
+      first_name: {
         type: Sequelize.STRING,
       },
-      lastName: {
+      last_name: {
         type: Sequelize.STRING,
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "users",
