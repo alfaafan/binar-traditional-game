@@ -1,5 +1,8 @@
 "use strict";
 const { Model } = require("sequelize");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -14,7 +17,43 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
+      this.hasMany(models.History, {
+        foreignKey: "user_id",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
+
+    static #encrypt = (password) => bcrypt.hashSync(password, 10);
+
+    static register = ({ username, password }) => {
+      const encryptedPassword = this.#encrypt(password);
+      return this.create({ username, password: encryptedPassword });
+    };
+
+    checkPassword = (password) => bcrypt.compareSync(password, this.password);
+
+    generateToken = () => {
+      const payload = {
+        id: this.id,
+        username: this.username,
+      };
+      const secret = "rahasia";
+      const token = jwt.sign(payload, secret);
+      return token;
+    };
+
+    static authenticate = async ({ username, password }) => {
+      try {
+        const user = await this.findOne({ where: { username } });
+        if (!user) return Promise.reject("User not found!");
+        const isPasswordValid = user.checkPassword(password);
+        if (!isPasswordValid) return Promise.reject("Wrong password!");
+        return Promise.resolve(user);
+      } catch (err) {
+        Promise.reject(err);
+      }
+    };
   }
   Users.init(
     {

@@ -1,23 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models");
-const authController = require("../controllers/authController");
+const auth = require("../controllers/authController");
 
-router.use((req, res, next) => {
-  console.log("router level middleware for auth");
-  next();
-});
+// router.use(express.urlencoded({ extended: false }));
 
-router.use(express.urlencoded({ extended: false }));
+// router.use(express.json());
 
-router.use(express.json());
+router.get("/login", auth.getLogin);
 
-router.get("/login", authController.getLogin);
+router.post("/login", auth.login);
 
-router.post("/login", authController.postLogin);
+router.get("/register", auth.getRegister);
 
-router.get("/register", authController.getRegister);
-
-router.post("/register", authController.postRegister);
+router.post("/register", auth.register);
 
 module.exports = router;
