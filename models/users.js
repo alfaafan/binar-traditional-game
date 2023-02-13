@@ -2,6 +2,9 @@
 const { Model } = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
@@ -26,9 +29,9 @@ module.exports = (sequelize, DataTypes) => {
 
     static #encrypt = (password) => bcrypt.hashSync(password, 10);
 
-    static register = ({ username, password }) => {
+    static register = ({ username, password, role }) => {
       const encryptedPassword = this.#encrypt(password);
-      return this.create({ username, password: encryptedPassword });
+      return this.create({ username, password: encryptedPassword, role });
     };
 
     checkPassword = (password) => bcrypt.compareSync(password, this.password);
@@ -38,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         id: this.id,
         username: this.username,
       };
-      const secret = "rahasia";
+      const secret = process.env.JWT_SECRET;
       const token = jwt.sign(payload, secret);
       return token;
     };
@@ -59,6 +62,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       username: DataTypes.STRING,
       password: DataTypes.STRING,
+      role: DataTypes.STRING,
     },
     {
       sequelize,

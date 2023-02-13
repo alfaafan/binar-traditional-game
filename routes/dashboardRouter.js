@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const dashboardController = require("../controllers/dashboardConstroller");
-const { User, User_biodata } = require("../models");
+const restrict = require("../middlewares/restrict");
 
-router.use((req, res, next) => {
-  console.log("router level middleware for dashboard");
-  next();
-});
+// router.use(restrict);
 
 // get dashboard
 router.get("/", dashboardController.getDashboard);
@@ -18,7 +15,7 @@ router.get("/users", dashboardController.getUsers);
 router.get("/users/:id", dashboardController.getUser);
 
 // create user
-router.post('/users', dashboardController.createUser)
+router.post("/users", dashboardController.createUser);
 
 // update data
 router.put("/users/:id", dashboardController.updateData);

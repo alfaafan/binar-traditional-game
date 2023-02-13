@@ -69,7 +69,7 @@ html .navigation a {
   color: var(--primary) !important;
 }
 
-input[type="email"],
+input[type="text"],
 input[type="password"] {
   color: var(--primary) !important;
 }

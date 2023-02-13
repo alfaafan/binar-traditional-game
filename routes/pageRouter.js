@@ -4,7 +4,7 @@ const restrict = require("../middlewares/restrict");
 
 router.get("/", pageController.index);
 
-router.get("/game", pageController.game);
+router.get("/game", restrict, pageController.game);
 
 router.get("/whoami", restrict, pageController.whoami);
 

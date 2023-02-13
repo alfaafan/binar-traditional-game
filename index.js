@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -9,17 +12,11 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-const pageRouter = require("./routes/pageRouter");
-app.use(pageRouter);
+const passport = require("./lib/passport");
+app.use(passport.initialize());
 
-const authRouter = require("./routes/authRouter");
-app.use(authRouter);
-
-const dashboardRouter = require("./routes/dashboardRouter");
-app.use("/dashboard", dashboardRouter);
-
-const roomRouter = require("./routes/roomRouter");
-app.use("/room", roomRouter);
+const router = require("./routes/router");
+app.use(router);
 
 app.use((err, req, res, next) => {
   res.status(500).json({

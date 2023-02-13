@@ -17,7 +17,7 @@ module.exports = {
   register: async (req, res) => {
     try {
       const user = await Users.register(req.body);
-      res.redirect("/login");
+      res.send(user);
     } catch (err) {
       res.status(500).send(err);
     }
@@ -31,7 +31,7 @@ module.exports = {
       res.json(format(user));
     } catch (err) {
       res.status(403).json({
-        message: "login failed",
+        message: err,
       });
     }
   },
