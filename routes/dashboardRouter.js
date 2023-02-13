@@ -3,7 +3,7 @@ const router = express.Router();
 const dashboardController = require("../controllers/dashboardConstroller");
 const restrict = require("../middlewares/restrict");
 
-// router.use(restrict);
+router.use(restrict);
 
 // get dashboard
 router.get("/", dashboardController.getDashboard);

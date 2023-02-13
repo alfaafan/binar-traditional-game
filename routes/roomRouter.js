@@ -2,10 +2,12 @@ const router = require("express").Router();
 const room = require("../controllers/roomController");
 const restrict = require("../middlewares/restrict");
 
-router.get("/", restrict, room.index);
+router.use(restrict);
 
-router.post("/create", restrict, room.create);
+router.get("/", room.index);
 
-router.post("/join", restrict, room.join);
+router.post("/create", room.create);
+
+router.post("/join", room.join);
 
 module.exports = router;
